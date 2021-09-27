@@ -9,73 +9,91 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class RoomListComponent implements OnInit {
 
-  public roomList:any =  new Array<Room>();
+  // public roomList:any =  new Array<Room>();
+  public roomList: any = [
+    {
+      number: 506,
+      capacity: 25,
+    },
+    {
+      number: 516,
+      capacity: 50,
+    },
+    {
+      number: 517,
+      capacity: 15,
+    },
+    {
+      number: 518,
+      capacity: 45,
+    },
+  ]
 
   public searchFields: any[] = ['number'];
   public searchString;
 
-  public room:Room = new Room();
-  constructor(private roomServices:RoomServices, private toastr:ToastrService) { }
-  
+  public room: Room = new Room();
+  constructor(private roomServices: RoomServices, private toastr: ToastrService) { }
+
   ngOnInit(): void {
     this.getAllRooms()
   }
 
-  getAllRooms(){
-    this.roomServices.getRooms().subscribe(result=>{
+  getAllRooms() {
+    this.roomServices.getRooms().subscribe(result => {
       this.roomList.length = 0;
-      this.roomList = result.data?.map(data=>{
+      this.roomList = result.data?.map(data => {
         return new Room(data);
       })
       console.log("result, result", result);
     })
   }
-  onClickNewRoom(f){
+  onClickNewRoom(f) {
     this.room = new Room();
     f.resetForm();
   }
 
-  onClickEdit(item, index){
+  onClickEdit(item, index) {
     this.room = new Room(item);
   }
-  onClickDelete(item:Room, index){
-    this.roomServices.deleteRoom(item).subscribe(result =>{
-      if(result.success == 1){
-        this.toastr.success(result.message,'Success');
+  onClickDelete(item: Room, index) {
+    this.roomServices.deleteRoom(item).subscribe(result => {
+      if (result.success == 1) {
+        this.toastr.success(result.message, 'Success');
         this.roomList.splice(index, 1);
-      }else{
-        this.toastr.error(result.message,'Error');
+      } else {
+        this.toastr.error(result.message, 'Error');
       }
     })
   }
-  onClickSave(f){
-    if(!this.room.room_no){
-      this.roomServices.saveRoom(this.room).subscribe(result=>{
+  onClickSave(f) {
+    if (!this.room.room_no) {
+      this.roomServices.saveRoom(this.room).subscribe(result => {
         console.log("result", result);
-        if(result.success == 1){
+        if (result.success == 1) {
           this.roomList.push(new Room(result.data));
           this.room = new Room();
-          this.toastr.success("Save Successfully ",'Success');
+          this.toastr.success("Save Successfully ", 'Success');
           f.resetForm();
-        }else{
-          this.toastr.error(result.message,'Error');
+        } else {
+          this.toastr.error(result.message, 'Error');
         }
       })
-    }else{
-      this.roomServices.updateRoom(this.room).subscribe(result=>{
+    } else {
+      this.roomServices.updateRoom(this.room).subscribe(result => {
         console.log("result", result);
-        if(result.success == 1){
-          this.toastr.success("Update Successfully ",'Success');
+        if (result.success == 1) {
+          this.toastr.success("Update Successfully ", 'Success');
           this.getAllRooms();
-        }else{
-          this.toastr.error(result.message,'Error');
+        } else {
+          this.toastr.error(result.message, 'Error');
         }
       })
     }
-    
+
   }
-  onClickUpdate(){
-    this.roomServices.updateRoom(this.room).subscribe(result=>{
+  onClickUpdate() {
+    this.roomServices.updateRoom(this.room).subscribe(result => {
       console.log("result", result);
       this.room = new Room();
     })

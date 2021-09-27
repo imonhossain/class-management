@@ -1,6 +1,3 @@
-
-
-
 <div class="container-fluid mt-3">
   <div class="row">
     <div class="col-md-8">
@@ -11,8 +8,8 @@
               <h4 class="mb-0">Course list</h4>
             </div>
             <div class="col-md-6">
-              <input class="form-control list-item-surch-box"
-              placeholder="Search here" type="text" [(ngModel)]="searchString">
+              <input class="form-control list-item-surch-box" placeholder="Search here" type="text"
+                [(ngModel)]="searchString">
             </div>
           </div>
         </div>
@@ -25,7 +22,7 @@
                   <th scope="col">Course Code</th>
                   <!-- <th scope="col">Semester</th> -->
                   <th scope="col">Credit</th>
-                  <th scope="col" class="text-center">Actions</th>
+                  <!-- <th scope="col" class="text-center">Actions</th> -->
                 </tr>
               </thead>
               <tbody>
@@ -34,10 +31,10 @@
                   <td>{{ item.course_code }}</td>
                   <!-- <td>{{ item.semester}}</td> -->
                   <td>{{ item.course_credit}}</td>
-                  <td class="text-center">
+                  <!-- <td class="text-center">
                     <button class="btn btn-info btn-sm mr-1" (click)="onClickEdit(item, i)">Edit</button>
                     <button class="btn btn-danger btn-sm" (click)="onClickDelete(item, i)">Delete</button>
-                  </td>
+                  </td> -->
                 </tr>
               </tbody>
             </table>
@@ -57,38 +54,49 @@
             </div>
           </div>
         </div>
-        <div class="card-body" >
+        <div class="card-body">
           <div class="form-group">
-            <input type="text" class="form-control" [(ngModel)]="course.course_name" name="course_name" #course_name="ngModel">
+            <input type="text" class="form-control" [(ngModel)]="course.course_name" name="course_name"
+              #course_name="ngModel">
             <label class="form-control-placeholder cs-sup">Course Name</label>
-            <div *ngIf="f.submitted && course_name.invalid || (course_name.invalid && (course_name.dirty || course_name.touched))"
+            <div
+              *ngIf="f.submitted && course_name.invalid || (course_name.invalid && (course_name.dirty || course_name.touched))"
               class="alert alert-danger">
               <div *ngIf="course_name.errors.required">
                 Course Name is required.
               </div>
             </div>
-          </div><!--/.form-group-->
+          </div>
+          <!--/.form-group-->
           <div class="form-group">
-            <input type="text" class="form-control" [(ngModel)]="course.course_code" name="course_code" #course_code="ngModel" required minlength="4">
+            <input type="text" class="form-control" [(ngModel)]="course.course_code" name="course_code"
+              #course_code="ngModel" required minlength="4">
             <label class="form-control-placeholder cs-sup">Course Code</label>
-            <div *ngIf="f.submitted && course_code.invalid || (course_code.invalid && (course_code.dirty || course_code.touched))" class="alert alert-danger">
+            <div
+              *ngIf="f.submitted && course_code.invalid || (course_code.invalid && (course_code.dirty || course_code.touched))"
+              class="alert alert-danger">
               <div *ngIf="course_code.errors.required">
                 Course Code is required.
               </div>
               <div *ngIf="course_code.errors.minlength">
-               Code must be at least 4 characters long.
+                Code must be at least 4 characters long.
               </div>
             </div>
-          </div><!--/.form-group-->
+          </div>
+          <!--/.form-group-->
           <div class="form-group">
-            <input type="number" class="form-control" [(ngModel)]="course.course_credit" name="course_credit" #course_credit="ngModel" required>
+            <input type="number" class="form-control" [(ngModel)]="course.course_credit" name="course_credit"
+              #course_credit="ngModel" required>
             <label class="form-control-placeholder cs-sup">Course Credit</label>
-            <div *ngIf="f.submitted && course_credit.invalid || (course_credit.invalid && (course_credit.dirty || course_credit.touched))" class="alert alert-danger">
+            <div
+              *ngIf="f.submitted && course_credit.invalid || (course_credit.invalid && (course_credit.dirty || course_credit.touched))"
+              class="alert alert-danger">
               <div *ngIf="course_credit.errors.required">
                 Course Credit is required.
               </div>
             </div>
-          </div><!--/.form-group-->
+          </div>
+          <!--/.form-group-->
           <!-- <div class="form-group">
             <input type="number" class="form-control" [(ngModel)]="course.semester" name="semester" #semester="ngModel" required>
             <label class="form-control-placeholder cs-sup">Semester</label>
@@ -102,10 +110,11 @@
 
           <div>
             <button class="btn btn-primary" *ngIf="!course.course_no" type="submit">Save</button>
-            <button class="btn btn-primary" *ngIf="course.course_no"  type="submit">Update</button>
+            <button class="btn btn-primary" *ngIf="course.course_no" type="submit">Update</button>
           </div>
         </div>
-      </form><!--/.card-->
+      </form>
+      <!--/.card-->
     </div>
   </div>
 </div>

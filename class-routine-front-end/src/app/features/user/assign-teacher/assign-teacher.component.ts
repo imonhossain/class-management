@@ -13,113 +13,139 @@ import { Teacher } from 'src/app/models/teacher.model';
   styleUrls: ['./assign-teacher.component.css']
 })
 export class AssigntTeacherComponent implements OnInit {
-  public assignList:any =  new Array<Assign>();
-  public courseList:any =  new Array<Course>();
-  public teacherList:any =  new Array<Teacher>();
+  public assignList: any = new Array<Assign>();
+  // public courseList:any =  new Array<Course>();
+  // public teacherList:any =  new Array<Teacher>();
+  public teacherList: any = [
+    {
+      name: "Teacher 1",
+      email: "teacher1@gmail.com",
+      phone: "0181258555"
+    },
+    {
+      name: "Teacher 2",
+      email: "teacher2@gmail.com",
+      phone: "0181258555"
+    }
+  ]
+  public courseList: any = [
+    {
+      id: 1,
+      course_name: "Mathematics I (Differential Calculus & Integral 3 Calculus)",
+      course_code: "MATH 1101",
+      course_credit: 3
+    },
+    {
+      id: 2,
+      course_name: "English II (Advanced)",
+      course_code: "ENG 1204",
+      course_credit: 3
+    },
+  ]
   constructor(
-    private assignServices:AssignServices, 
-    private courseServices:CourseServices, 
-    private teacherServices:TeacherServices, 
-    private toastr:ToastrService) { }
+    private assignServices: AssignServices,
+    private courseServices: CourseServices,
+    private teacherServices: TeacherServices,
+    private toastr: ToastrService) { }
 
   public searchFields: any[] = ['course_name'];
   public searchString;
 
-  public assign:Assign = new Assign();
-  
+  public assign: Assign = new Assign();
+
   ngOnInit(): void {
     this.getAllAssigns();
     this.getAllCourses();
     this.getAllTeachers();
   }
-  
-  getAllCourses(){
-    this.courseServices.getCourses().subscribe(result=>{
+
+  getAllCourses() {
+    this.courseServices.getCourses().subscribe(result => {
       this.courseList.length = 0;
-      this.courseList = result.data?.map(data=>{
+      this.courseList = result.data?.map(data => {
         return new Course(data);
       })
     })
   }
-  getAllTeachers(){
-    this.teacherServices.getTeachers().subscribe(result=>{
+  getAllTeachers() {
+    this.teacherServices.getTeachers().subscribe(result => {
       this.teacherList.length = 0;
-      this.teacherList = result.data?.map(data=>{
+      this.teacherList = result.data?.map(data => {
         return new Teacher(data);
       })
     })
   }
 
-  getAllAssigns(){
-    this.assignServices.getAssigns().subscribe(result=>{
+  getAllAssigns() {
+    this.assignServices.getAssigns().subscribe(result => {
       this.assignList.length = 0;
-      this.assignList = result.data?.map(data=>{
+      this.assignList = result.data?.map(data => {
         // console.log("===", data);
         return new Assign(data);
       })
     })
   }
-  onClickNewAssign(f){
+  onClickNewAssign(f) {
     this.assign = new Assign();
     f.resetForm();
   }
 
-  onClickEdit(item, index){
+  onClickEdit(item, index) {
     this.assign = new Assign(item);
   }
-  onClickDelete(item:Assign, index){
-    this.assignServices.deleteAssign(item).subscribe(result =>{
-      if(result.success == 1){
-        this.toastr.success(result.message,'Success');
+  onClickDelete(item: Assign, index) {
+    this.assignServices.deleteAssign(item).subscribe(result => {
+      if (result.success == 1) {
+        this.toastr.success(result.message, 'Success');
         this.assignList.splice(index, 1);
-      }else{
-        this.toastr.error(result.message,'Error');
+      } else {
+        this.toastr.error(result.message, 'Error');
       }
     })
   }
-  onClickSave(f){
+  onClickSave(f) {
     // var result = this.assignList.filter(function(v, i) {
     //   return ((v["course_no"] == this.assign.course_no && v["teacher_no"] == this.assign.teacher_no) && v.semister == this.assign.semister );
     // })
-    var result = this.assignList.filter(v=>{
-      return ((v["course_no"] == this.assign.course_no && v["teacher_no"] == this.assign.teacher_no) && v.semister == this.assign.semister );
+    var result = this.assignList.filter(v => {
+      return ((v["course_no"] == this.assign.course_no && v["teacher_no"] == this.assign.teacher_no) && v.semister == this.assign.semister);
     })
     console.log(result)
-    if(result?.length){
-      this.toastr.warning("Duplicate value found ",'Warning');
+    if (result?.length) {
+      this.toastr.warning("Duplicate value found ", 'Warning');
       return;
     }
-    if(!this.assign.assign_no){
-      this.assignServices.saveAssign(this.assign).subscribe(result=>{
+    if (!this.assign.assign_no) {
+      this.assignServices.saveAssign(this.assign).subscribe(result => {
         console.log("result", result);
-        if(result.success == 1){
+        if (result.success == 1) {
           // this.assignList.push(new Assign(result.data));
           this.assign = new Assign();
           let data = result.data;
-          this.toastr.success(`Day ${data.day}, Time:${data.startDate} - ${data.endDate} `,'Success',{
+          this.toastr.success(`Day ${data.day}, Time:${data.startDate} - ${data.endDate} `, 'Success', {
             timeOut: 10000,
           });
           // this.toastr.success("Save Successfully ",'Success');
           f.resetForm();
-        }else{
-          this.toastr.error(result.message,'Error');
+        } else {
+          this.toastr.error(result.message, 'Error');
         }
       })
-    }else{
-      this.assignServices.updateAssign(this.assign).subscribe(result=>{
+    } else {
+      this.assignServices.updateAssign(this.assign).subscribe(result => {
         console.log("result", result);
-        if(result.success == 1){
-          this.toastr.success("Update Successfully ",'Success');
+        if (result.success == 1) {
+          this.toastr.success("Update Successfully ", 'Success');
           this.getAllAssigns();
-        }else{
-          this.toastr.error(result.message,'Error');
+        } else {
+          this.toastr.error(result.message, 'Error');
         }
       })
     }
-    
+
   }
-  onClickUpdate(){
-    this.assignServices.updateAssign(this.assign).subscribe(result=>{
+  onClickUpdate() {
+    this.assignServices.updateAssign(this.assign).subscribe(result => {
       console.log("result", result);
       this.assign = new Assign();
     })
