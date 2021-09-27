@@ -1,0 +1,95 @@
+<div class="container-fluid mt-3">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-md-6">
+              <h4 class="mb-0">Teacher list</h4>
+            </div>
+            <div class="col-md-6">
+              <input class="form-control list-item-surch-box"
+              placeholder="Search here" type="text" [(ngModel)]="searchString">
+            </div>
+          </div>
+        </div>
+        <div class="card-body p-0">
+          <div class="teable-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th class="text-center">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of teacherList | filter : searchFields : searchString; let i = index;">
+                  <td>{{ item.name }}</td>
+                  <td>{{ item.email }}</td>
+                  <td>{{ item.phone}}</td>
+                  <td class="text-center">
+                    <button class="btn btn-info btn-sm mr-1" (click)="onClickEdit(item, i)">Edit</button>
+                    <button class="btn btn-danger btn-sm" (click)="onClickDelete(item, i)">Delete</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      
+      
+    </div>
+    <div class="col-md-4">
+      <form class="card" name="form" (ngSubmit)="f.form.valid && onClickSave(f)" #f="ngForm" novalidate>
+        <div class="card-header">
+          <div class="row">
+            <div class="col-md-6">
+              <!-- <h4 class="mb-0">New Teacher</h4> -->
+            </div>
+            <div class="col-md-6 text-right">
+              <button class="btn btn-primary" (click)="onClickNewTeacher(f)" type="button">New Teacher</button>
+            </div>
+          </div>
+        </div>
+        <div class="card-body" >
+          <div class="form-group">
+            <input type="email" class="form-control" [(ngModel)]="teacher.name" name="name" #name="ngModel" required minlength="3">
+            <label class="form-control-placeholder cs-sup">Name</label>
+            <div *ngIf="f.submitted && name.invalid || (name.invalid && (name.dirty || name.touched))"
+              class="alert alert-danger">
+              <div *ngIf="name.errors.required">
+                Name is required.
+              </div>
+              <div *ngIf="name.errors.minlength">
+                Name must be at least 3 characters long.
+              </div>
+            </div>
+          </div><!--/.form-group-->
+          <div class="form-group">
+            <input type="email" class="form-control" [(ngModel)]="teacher.phone" name="phone" #phone="ngModel" required minlength="11">
+            <label class="form-control-placeholder cs-sup">Phone</label>
+            <div *ngIf="f.submitted && phone.invalid || (phone.invalid && (phone.dirty || phone.touched))" class="alert alert-danger">
+              <div *ngIf="phone.errors.required">
+                Phone is required.
+              </div>
+              <div *ngIf="phone.errors.minlength">
+                Phone must be at least 11 characters long.
+              </div>
+            </div>
+          </div><!--/.form-group-->
+          <div class="form-group">
+            <input type="email" class="form-control" [(ngModel)]="teacher.email" name="email">
+            <label class="form-control-placeholder">Email</label>
+          </div><!--/.form-group-->
+          <div>
+            <button class="btn btn-primary" *ngIf="!teacher.teacher_no" type="submit">Save</button>
+            <button class="btn btn-primary" *ngIf="teacher.teacher_no"  type="submit">Update</button>
+          </div>
+        </div>
+      </form><!--/.card-->
+    </div>
+  </div>
+</div>

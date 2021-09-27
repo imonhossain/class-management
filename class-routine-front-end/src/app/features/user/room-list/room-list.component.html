@@ -1,0 +1,108 @@
+<div class="container-fluid mt-3">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-md-6">
+              <h4 class="mb-0">Room list</h4>
+            </div>
+            <div class="col-md-6">
+              <input class="form-control list-item-surch-box"
+              placeholder="Search here" type="text" [(ngModel)]="searchString">
+            </div>
+          </div>
+        </div>
+        <div class="card-body p-0">
+          <div class="teable-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Serial</th>
+                  <th>Room Number</th>
+                  <th>Room Capacity</th>
+                  <th class="text-center">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of roomList | filter : searchFields : searchString; let i = index;">
+                  <td>{{ i+1 }}</td>
+                  <td>{{ item.number }}</td>
+                  <td>{{ item.capacity }}</td>
+                  <td class="text-center">
+                    <button class="btn btn-info btn-sm mr-1" (click)="onClickEdit(item, i)">Edit</button>
+                    <button class="btn btn-danger btn-sm" (click)="onClickDelete(item, i)">Delete</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      
+      
+    </div>
+    <div class="col-md-4">
+      <form class="card" name="form" (ngSubmit)="f.form.valid && onClickSave(f)" #f="ngForm" novalidate>
+        <div class="card-header">
+          <div class="row">
+            <div class="col-md-6">
+              <!-- <h4 class="mb-0">New Room</h4> -->
+            </div>
+            <div class="col-md-6 text-right">
+              <button class="btn btn-primary" (click)="onClickNewRoom(f)" type="button">New Room</button>
+            </div>
+          </div>
+        </div>
+        <div class="card-body" >
+          <div class="form-group">
+            <input type="text" class="form-control" [(ngModel)]="room.number" number="number"  name="number" #number="ngModel" required>
+            <label class="form-control-placeholder cs-sup">Room Number</label>
+            <div *ngIf="f.submitted && number.invalid || (number.invalid && (number.dirty || number.touched))"
+              class="alert alert-danger">
+              <div *ngIf="number.errors.required">
+                Room Number is required.
+              </div>
+            </div>
+          </div><!--/.form-group-->
+          <div class="form-group">
+            <input type="number" class="form-control" [(ngModel)]="room.capacity" name="capacity" #capacity="ngModel" required >
+            <label class="form-control-placeholder cs-sup">Room Capacity</label>
+            <div *ngIf="f.submitted && capacity.invalid || (capacity.invalid && (capacity.dirty || capacity.touched))" class="alert alert-danger">
+              <div *ngIf="capacity.errors.required">
+                Room Capacity is required.
+              </div>
+            </div>
+          </div><!--/.form-group-->
+          <div>
+            <button class="btn btn-primary" *ngIf="!room.room_no" type="submit">Save</button>
+            <button class="btn btn-primary" *ngIf="room.room_no"  type="submit">Update</button>
+          </div>
+        </div>
+      </form><!--/.card-->
+    </div>
+  </div>
+</div>
+<!-- <div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <h2>Room list</h2>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Serail</th>
+              <th scope="col">Room Number</th>
+              <th scope="col">Student Capacity</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of roomList; let i = index">
+              <th>{{ i+1 }}</th>
+              <td>{{ item.number }}</td>
+              <td>{{ item.capacity }}</td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+  </div>
+</div> -->

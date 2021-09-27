@@ -1,0 +1,60 @@
+<app-header></app-header>
+<br />
+<br />
+<div class="login-page-wrapper bg-gray">
+  <div class="login-wrapper">
+    <div class="login-form-wrapper">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card p-4 mt-5 ">
+              <form class="login-form" (ngSubmit)="atemptLogin()">
+                <div class="singin-logo text-center mb-4">
+                  <img src="assets/images/logo/logo.png" alt="">
+                </div>
+                <div class="text-center">
+                  <h5 class="pb20  text-regular">User Sign in</h5>
+                </div>
+                <hr>
+                <div class="input-group input-group--user-name mt-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text bg-white"><i class="fa fa-user fa-lg text-primary"></i></span>
+                  </div>
+                  <input [(ngModel)]="username" required name="username" placeholder="E-mail"
+                    type="text" class="form-control form-control-lg bg-white" required>
+                </div>
+ 
+                <div class="input-group input-group--password mt-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text bg-white"><i class="fa fa-unlock-alt fa-lg text-primary "></i></span>
+                  </div>
+                  <input [(ngModel)]="password" required type="password" name="password"
+                    class="form-control form-control-lg bg-white" id="password" placeholder="Password" required>    
+                </div>
+                <!-- <div class="d-flex justify-content-between align-items-center password-remember-wrapper" *ngIf="!forgetpassword">
+                  <div class="mt-2"><a class="forgetpasswordcontrol" (click)=" onClickpasswordsend()">&nbsp;&nbsp;Forget Password?</a></div>
+                </div> -->
+
+
+                <input type="submit"
+                  class="btn btn-lg sign-in-button btn-primary mt-base  btn-block text-bolder mt-4 mb-4"
+                  value="SIGN IN">
+              </form>
+              <!-- End Form-->
+            </div>
+          </div>
+          <div class="col-md-6">
+            
+              
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!--/.login-form-wrapper-->
+  </div>
+  <br />
+  <br />
+</div>
+<app-footer></app-footer>
+<nl-popup></nl-popup>

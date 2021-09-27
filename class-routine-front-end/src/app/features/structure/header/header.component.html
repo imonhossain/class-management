@@ -1,0 +1,30 @@
+
+<div class="header">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <!-- <a class="navbar-brand mr-auto" href="#">Logo</a> -->
+    <a class="navbar-brand mr-auto" *ngIf="user.id">Wellcome <span class="text-primary">{{user.name}}</span>, your are a <span class="text-primary">{{user.role}}</span></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        <!-- <li class="nav-item">
+          <a class="nav-link" routerLink="/course-list" routerLinkActive="active" *ngIf="user.id">Course List</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/course-add" routerLinkActive="active" *ngIf="user.id && user.role == 'admin'">Course Add</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/room-list" routerLinkActive="active"  *ngIf="user.id">Room List</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/room-add" routerLinkActive="active" *ngIf="user.id && user.role == 'admin'">Room Add</a>
+        </li> -->
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/login" routerLinkActive="active" *ngIf="!user.id">Login</a>
+          <a class="nav-link" routerLink="/logout" routerLinkActive="active" *ngIf="user.id">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>

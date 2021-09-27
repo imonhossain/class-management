@@ -1,0 +1,192 @@
+
+
+
+<div class="container-fluid mt-3">
+  <div class="row">
+    <div class="col-md-8">
+      
+      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-md-6">
+              <!-- <h4 class="mb-0">Booking list</h4> -->
+              <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link cursor-pointer active" [class.active]="isBookingList" (click)="isBookingList = !isBookingList">Booking List</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link cursor-pointer" [class.active]="!isBookingList"  (click)="isBookingList = !isBookingList">Unbooking List </a>
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-6">
+              <input class="form-control list-item-surch-box"
+              placeholder="Search here" type="text" [(ngModel)]="searchString">
+            </div>
+          </div>
+        </div>
+        <div class="card-body p-0 table-card-body">
+          <div class="teable-responsive">
+            <table class="table" [hidden]="!isBookingList">
+              <thead>
+                <tr>
+                  <th scope="col">Course Name </th>
+                  <th scope="col">Teacher </th>
+                  <th scope="col">Day</th>
+                  <th scope="col">Time</th>
+                  <th scope="col">Room</th>
+                  <th scope="col" class="text-center">Actions</th> 
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of bookingList | filter : searchFields : searchString; let i = index;">
+                  <td>{{ item.course_name }}-({{item.semister}})</td>
+                  <td>{{ item.teacher_name }}</td>
+                  <td>{{ item.day }}</td>
+                  <td>{{ item.startDate }} - {{ item.endDate }}</td>
+                  <td>{{ item.room_number }}</td>
+                  <!-- <td>{{ item.course_name }}</td>
+                  <td>{{ item.teacher_name}}</td>
+                  <td>{{ item.register_student}}</td> -->
+                  <td class="text-center">
+                    <button class="btn btn-info btn-sm mr-1" (click)="onClickEdit(item, i)">Edit</button>
+                    <button class="btn btn-danger btn-sm" (click)="onClickDelete(item, i)">Delete</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <form class="card" name="form" (ngSubmit)="f.form.valid && onClickSave(f)" #f="ngForm" novalidate>
+        <div class="card-header">
+          <div class="row">
+            <div class="col-md-6">
+              <!-- <h4 class="mb-0">New Assign</h4> -->
+            </div>
+            <div class="col-md-6 text-right">
+              <button class="btn btn-primary" (click)="onClickNewBooking(f)" type="button">New Assign</button>
+            </div>
+          </div>
+        </div>
+        <div class="card-body" >
+          <div class="form-group">
+            <ng-select [clearable]="false"  name="assign_no" [(ngModel)]="booking.assign_no" #course_no="ngModel">
+              <ng-option [value]="null">Select a Course </ng-option>
+              <ng-option *ngFor="let item of assignList" [value]="item.assign_no">
+                {{item.course_name}}({{item.semister}}) -  {{item.teacher_name}}</ng-option>
+            </ng-select>
+            <label class="form-control-placeholder cs-sup">Assign list</label>
+            <!-- <select  class="form-control" [(ngModel)]="booking.assign_no" name="semester">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+            </select> -->
+            
+          </div>
+          <!-- <div class="form-group">
+            <select  class="form-control" [(ngModel)]="assign.section" name="section" #section="ngModel">
+              <option value="a">A</option>
+              <option value="b">B</option>
+              <option value="c">C</option>
+              <option value="d">D</option>
+            </select>
+            <label class="form-control-placeholder cs-sup">Section</label>
+            <div *ngIf="f.submitted && section.invalid || (section.invalid && (section.dirty || section.touched))"
+              class="alert alert-danger">
+              <div *ngIf="section.errors.required">
+                section is required.
+              </div>
+            </div>
+          </div> -->
+          <div class="form-group">
+            <ng-select [clearable]="false"  name="room_no" [(ngModel)]="booking.room_no" #room_no="ngModel">
+              <ng-option [value]="null">Select a Course </ng-option>
+              <ng-option *ngFor="let item of roomList" [value]="item.room_no">
+                student:{{item.number}}, capacity:{{item.capacity}} </ng-option>
+            </ng-select>
+            <label class="form-control-placeholder cs-sup">Room Number</label>
+          </div>
+          <div class="form-group">
+            <select  class="form-control" [(ngModel)]="booking.day" name="semester">
+              <option value="Saturday">Saturday</option>
+              <option value="Sunday">Sunday</option>
+              <option value="Monday">Monday</option>
+              <option value="Tuesday">Tuesday</option>
+              <option value="Wednesday">Wednesday</option>
+              <option value="Thursday">Thursday</option>
+              <option value="Friday">Friday</option>
+            </select>
+            <label class="form-control-placeholder cs-sup">Selected Day</label>
+          </div>
+          <div class="form-group">
+            <input class="form-control" aria-label="12hr format" [format]="24"   [(ngModel)]="booking.startDate" name="startDate" [ngxTimepicker]="startDate">
+            <ngx-material-timepicker #startDate></ngx-material-timepicker>
+            <label class="form-control-placeholder cs-sup">Start Time</label>
+          </div>
+          <div class="form-group">
+            <input class="form-control" aria-label="12hr format" [format]="24"  [ngxTimepicker]="endDate"  [(ngModel)]="booking.endDate" name="endDate">
+            <ngx-material-timepicker #endDate></ngx-material-timepicker>
+            <label class="form-control-placeholder cs-sup">End Time</label>
+          </div>
+          <!-- <div class="form-group">
+            <input type="number" class="form-control" [(ngModel)]="assign.register_student" name="register_student" #register_student="ngModel" required>
+            <label class="form-control-placeholder cs-sup">Register Student</label>
+            <div *ngIf="f.submitted && register_student.invalid || (register_student.invalid && (register_student.dirty || register_student.touched))" class="alert alert-danger">
+              <div *ngIf="register_student.errors.required">
+                Register Student is required.
+              </div>
+            </div>
+          </div> -->
+          <!-- <div class="form-group">
+            <input type="text" class="form-control" [(ngModel)]="assign.assign_code" name="assign_code" #assign_code="ngModel" required minlength="4">
+            <label class="form-control-placeholder cs-sup">Assign Code</label>
+            <div *ngIf="f.submitted && assign_code.invalid || (assign_code.invalid && (assign_code.dirty || assign_code.touched))" class="alert alert-danger">
+              <div *ngIf="assign_code.errors.required">
+                Assign Code is required.
+              </div>
+              <div *ngIf="assign_code.errors.minlength">
+               Code must be at least 4 characters long.
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <input type="number" class="form-control" [(ngModel)]="assign.assign_credit" name="assign_credit" #assign_credit="ngModel" required>
+            <label class="form-control-placeholder cs-sup">Assign Credit</label>
+            <div *ngIf="f.submitted && assign_credit.invalid || (assign_credit.invalid && (assign_credit.dirty || assign_credit.touched))" class="alert alert-danger">
+              <div *ngIf="assign_credit.errors.required">
+                Assign Credit is required.
+              </div>
+            </div>
+          </div> -->
+          <!-- <div class="form-group">
+            <input type="number" class="form-control" [(ngModel)]="assign.semester" name="semester" #semester="ngModel" required>
+            <label class="form-control-placeholder cs-sup">Semester</label>
+            <div *ngIf="f.submitted && semester.invalid || (semester.invalid && (semester.dirty || semester.touched))" class="alert alert-danger">
+              <div *ngIf="semester.errors.required">
+                Semester is required.
+              </div>
+            </div>
+          </div> -->
+          <!--/.form-group-->
+
+          <div>
+            <button class="btn btn-primary" *ngIf="!booking.booking_no" type="submit">Save</button>
+            <button class="btn btn-primary" *ngIf="booking.booking_no"  type="submit">Update</button>
+          </div>
+        </div>
+      </form><!--/.card-->
+    </div>
+  </div>
+</div>

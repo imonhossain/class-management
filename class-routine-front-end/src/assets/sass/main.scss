@@ -1,0 +1,113 @@
+/* -----------------------------------
+** Vendors 
+-------------------------------------*/
+
+@import "vendors/bootstrap";
+@import "vendors/ngx-toast.scss";
+@import "vendors/ng-select";
+// @import "vendors/animate";
+// @import "vendors/font-awesome.min";
+// @import "vendors/ionicons.min";
+
+// *{
+//   color:red !important;
+// }
+.content-body{
+  padding-left: 220px;
+}
+.sidebar-area{
+  position: fixed;
+  height: 100vh; 
+  top:0;
+  left:0;
+  width:220px;
+  background: #ddd;
+}
+.form-group {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.form-control-placeholder {
+  position: absolute;
+  top: -11px;
+  left:5px;
+  padding: 0 5px 0 7px;
+  transition: all 200ms;
+  opacity: 1;
+  background: #fff;
+}
+.cs-sup{
+  &:after{
+    color:#b21f2d;
+    content: ' *';
+
+  }
+}
+
+.cursor-pointer{
+  cursor: pointer;
+}
+.sidebar,.sidebar-area{
+  background: #023C3E;
+}
+.sidebar-logo{
+  // background: #fff;
+  margin-bottom: 10px;
+  padding-top: 10px;
+  img{
+    filter: brightness(0) invert(1);
+    max-width: 66px;
+  }
+}
+.list-group-item{
+  padding:0;
+  margin:0;
+  background: transparent;
+  .nav-link {
+    padding: 10px 1rem;
+    color:#fff;
+    &.active{
+      background: #046C6F;
+    }
+  }
+}
+.user-content-body{
+  padding-top: 55px;;
+}
+.header-area{
+  .header{
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 5;
+    width:calc(100% - 220px);
+   background: #fff;
+   border-bottom:1px solid #eee;
+  }
+}
+.card-header{
+  padding:5px 10px;
+  h4{
+    font-size:1.2rem;
+    padding-top: 7px;
+  }
+}
+.table-card-body{
+  max-height: 600px;
+  overflow: auto;
+}
+.table-small-padding{
+  &.table{
+    td,th{
+      padding: 4px;
+      vertical-align: top;
+      border-top: 1px solid #dee2e6;
+      font-size: 15px;
+    }
+  }
+}
+.table-small-padding.table td, 
+.table-small-padding.table th{
+  border:1px solid #b3b3b3;
+}

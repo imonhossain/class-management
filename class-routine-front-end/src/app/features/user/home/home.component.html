@@ -1,0 +1,98 @@
+
+
+
+<div class="container-fluid mt-3">
+  <div class="row">
+    <div class="col-md-12">
+      
+      <div class="card">
+        <div class="card-header">
+          ClassRoutine
+        </div> 
+        <div class="card-body p-0 table-card-body">
+          <div class="teable-responsive">
+            <table class="table table-small-padding">
+              <!-- <thead>
+                <tr>
+                  <th scope="col">Room Number </th>
+                  <th scope="col">Teacher </th>
+                  <th scope="col">Day</th>
+                  <th scope="col">Time</th>
+                  <th scope="col">Course</th>
+                </tr>
+              </thead> -->
+              <tbody>
+                <tr>
+                  <th>Room Number</th>
+                  <th>8:45am-9:45am</th>
+                  <th>9:45am-10:45am</th>
+                  <th>10:45am-11:45am</th>
+                  <th>11:45am-12:45am</th>
+       
+                  <th>2:30pm-3:30pm</th>
+                  <th>3:30pm-4:30pm</th>
+                  <th>4:30pm-5:30pm</th>
+                  <th>5:30pm-6:30pm</th>
+                  <th>6:30pm-7:30pm</th>
+                  <th>7:30pm-8:30pm</th>
+    
+                </tr>
+                <tr *ngFor="let item of list | filter : searchFields : searchString; let i = index;">
+                  <td>{{ item.room_number }}</td>
+                  <td [attr.colspan]="item.hour8">
+                    <strong>{{ item.hour8_course }}</strong> -<strong class="text-info">({{ item.hour8_semister }})</strong><br/>
+                    {{ item.hour8_teacher_name }}
+                  </td>
+                  <td *ngIf="item.hour8 !=2 " [attr.colspan]="item.hour9">
+                    <strong>{{ item.hour9_course }}</strong> -<strong class="text-info">({{ item.hour9_semister }})</strong><br/>
+                    {{ item.hour9_teacher_name }}
+                  </td>
+                  <td *ngIf="item.hour9 !=2 " [attr.colspan]="item.hour10">
+                    <strong>{{ item.hour10_course }}</strong> -<strong class="text-info">({{ item.hour10_semister }})</strong><br/>
+                    {{ item.hour10_teacher_name }}
+                  </td>
+                  <td *ngIf="item.hour10 !=2 " [attr.colspan]="item.hour11">
+                    <strong>{{ item.hour11_course }}</strong> -<strong class="text-info">({{ item.hour11_semister }})</strong><br/>
+                    {{ item.hour11_teacher_name }}
+                  </td>
+                  <td *ngIf="item.hour11 !=2 " [attr.colspan]="item.hour14">
+                    <strong>{{ item.hour14_course }}</strong> -<strong class="text-info">({{ item.hour14_semister }})</strong><br/>
+                    {{ item.hour14_teacher_name }}
+                  </td>
+                  <td *ngIf="item.hour14 !=2 " [attr.colspan]="item.hour15">
+                    <strong>{{ item.hour15_course }}</strong> -<strong class="text-info">({{ item.hour15_semister }})</strong><br/>
+                    {{ item.hour15_teacher_name }}
+                  </td>
+                  <td *ngIf="item.hour15 !=2 " [attr.colspan]="item.hour16">
+                    <strong>{{ item.hour16_course }}</strong> -<strong class="text-info">({{ item.hour16_semister }})</strong><br/>
+                    {{ item.hour16_teacher_name }}
+                  </td>
+                  <td *ngIf="item.hour16 !=2 " [attr.colspan]="item.hour17">
+                    <strong>{{ item.hour17_course }}</strong> -<strong class="text-info">({{ item.hour17_semister }})</strong><br/>
+                    {{ item.hour17_teacher_name }}
+                  </td>
+
+                  <td *ngIf="item.hour17 !=2 " [attr.colspan]="item.hour18">
+                    <strong>{{ item.hour18_course }}</strong> -<strong class="text-info">({{ item.hour18_semister }})</strong><br/>
+                    {{ item.hour18_teacher_name }}
+                  </td>
+                  <td *ngIf="item.hour18 !=2 " [attr.colspan]="item.hour19">
+                    <strong>{{ item.hour19_course }}</strong> -<strong class="text-info">({{ item.hour19_semister }})</strong><br/>
+                    {{ item.hour19_teacher_name }}
+                  </td>
+
+
+
+         
+              
+    
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

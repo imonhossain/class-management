@@ -1,0 +1,26 @@
+<div class="container">
+  <br/>
+  <br/>
+  <br/>
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="exampleInputEmail1">Room Number</label>
+            <input type="number" class="form-control" [(ngModel)]="room.number" name="number">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="exampleInputEmail1">Room Capacity</label>
+            <input type="number" class="form-control"  [(ngModel)]="room.capacity" name="capacity">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <button class="btn btn-primary" type="button" (click)="save()">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,38 @@
+<div class="sidebar">
+  <div class="sidebar-logo text-center">
+   <a  routerLink="/">
+    <img src="assets/images/logo.png">
+   </a>
+  </div>
+  <div class="sidebar-menu">
+    <ul  class="list-group">
+      <li class="list-group-item">
+        <a class="nav-link" routerLink="/course-list" routerLinkActive="active" *ngIf="user.id">Courses</a>
+      </li>
+      <!-- <li class="list-group-item">
+        <a class="nav-link" routerLink="/course-add" routerLinkActive="active" *ngIf="user.id && user.role == 'admin'">Course Add</a>
+      </li> -->
+      <li class="list-group-item">
+        <a class="nav-link" routerLink="/teachers" routerLinkActive="active"  *ngIf="user.id">Teachers</a>
+      </li>
+      <li class="list-group-item">
+        <a class="nav-link" routerLink="/room-list" routerLinkActive="active"  *ngIf="user.id">Rooms</a>
+      </li>
+      <li class="list-group-item">
+        <a class="nav-link" routerLink="/assign-teacher" routerLinkActive="active"  *ngIf="user.id">Assign Teacher</a>
+      </li>
+      <li class="list-group-item">
+        <a class="nav-link" routerLink="/room-booking" routerLinkActive="active"  *ngIf="user.id">Room Booking</a>
+      </li>
+      
+      <!-- <li class="list-group-item">
+        <a class="nav-link" routerLink="/room-add" routerLinkActive="active" *ngIf="user.id && user.role == 'admin'">Room Add</a>
+      </li> -->
+      <!-- <li class="list-group-item">
+        <a class="nav-link" routerLink="/login" routerLinkActive="active" *ngIf="!user.id">Login</a>
+        <a class="nav-link" routerLink="/logout" routerLinkActive="active" *ngIf="user.id">Logout</a>
+      </li> -->
+    </ul>
+  </div>
+
+</div>
