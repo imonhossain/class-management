@@ -107,9 +107,9 @@
 
           </div>
           <div class="form-group">
-            <ng-select [clearable]="false"  name="teacher_no" [(ngModel)]="assign.teacher_no" #teacher_no="ngModel">
+            <ng-select [clearable]="false"  name="teacher_id" [(ngModel)]="assign.teacher_id" #teacher_id="ngModel">
               <ng-option [value]="null">Select a Teacher </ng-option>
-              <ng-option *ngFor="let teacher of teacherList" [value]="teacher.teacher_no">
+              <ng-option *ngFor="let teacher of teacherList" [value]="teacher.teacher_id">
                 {{teacher.name}}</ng-option>
             </ng-select>
             <label class="form-control-placeholder cs-sup">Teacher Name</label>

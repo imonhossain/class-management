@@ -105,10 +105,10 @@ export class AssigntTeacherComponent implements OnInit {
   }
   onClickSave(f) {
     // var result = this.assignList.filter(function(v, i) {
-    //   return ((v["course_no"] == this.assign.course_no && v["teacher_no"] == this.assign.teacher_no) && v.semister == this.assign.semister );
+    //   return ((v["course_no"] == this.assign.course_no && v["teacher_id"] == this.assign.teacher_id) && v.semister == this.assign.semister );
     // })
     var result = this.assignList.filter(v => {
-      return ((v["course_no"] == this.assign.course_no && v["teacher_no"] == this.assign.teacher_no) && v.semister == this.assign.semister);
+      return ((v["course_no"] == this.assign.course_no && v["teacher_id"] == this.assign.teacher_id) && v.semister == this.assign.semister);
     })
     console.log(result)
     if (result?.length) {

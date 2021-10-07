@@ -67,7 +67,7 @@ export class RoomListComponent implements OnInit {
     })
   }
   onClickSave(f) {
-    if (!this.room.room_no) {
+    if (!this.room.room_id) {
       this.roomServices.saveRoom(this.room).subscribe(result => {
         console.log("result", result);
         if (result.success == 1) {

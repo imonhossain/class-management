@@ -62,7 +62,7 @@ export class TeacherComponent implements OnInit {
     })
   }
   onClickSave(f) {
-    if (!this.teacher.teacher_no) {
+    if (!this.teacher.teacher_id) {
       this.teacherServices.saveTeacher(this.teacher).subscribe(result => {
         console.log("result", result);
         if (result.success == 1) {

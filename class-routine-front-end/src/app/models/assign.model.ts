@@ -4,7 +4,7 @@ export class Assign {
   course_name: string;
   teacher_name: string;
   register_student: number;
-  teacher_no: number;
+  teacher_id: number;
   semister: string;
   section: string;
   constructor(options: any = {}) {
@@ -13,7 +13,7 @@ export class Assign {
       this.course_name = options.course_name || "";
       this.teacher_name = options.teacher_name || "";
       this.register_student = options.register_student || null;
-      this.teacher_no = options.teacher_no || null;
+      this.teacher_id = options.teacher_id || null;
       this.semister = options.semister || "";
       this.section = options.section || "";
       

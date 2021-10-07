@@ -34,14 +34,14 @@ CREATE TABLE `assigns` (
   `section` varchar(3) NOT NULL,
   `register_student` int(3) NOT NULL,
   `course_no` int(11) DEFAULT NULL,
-  `teacher_no` int(11) DEFAULT NULL
+  `teacher_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `assigns`
 --
 
-INSERT INTO `assigns` (`assign_no`, `semister`, `section`, `register_student`, `course_no`, `teacher_no`) VALUES
+INSERT INTO `assigns` (`assign_no`, `semister`, `section`, `register_student`, `course_no`, `teacher_id`) VALUES
 (39, '4', '', 20, 4, 12),
 (40, '4', '', 65, 6, 12),
 (41, '2', '', 20, 7, 10),
@@ -64,7 +64,7 @@ CREATE TABLE `bookings` (
   `day` varchar(11) DEFAULT NULL,
   `startDate` varchar(20) NOT NULL,
   `endDate` varchar(20) NOT NULL,
-  `room_no` int(11) DEFAULT NULL,
+  `room_id` int(11) DEFAULT NULL,
   `assign_no` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -72,7 +72,7 @@ CREATE TABLE `bookings` (
 -- Dumping data for table `bookings`
 --
 
-INSERT INTO `bookings` (`booking_no`, `day`, `startDate`, `endDate`, `room_no`, `assign_no`) VALUES
+INSERT INTO `bookings` (`booking_no`, `day`, `startDate`, `endDate`, `room_id`, `assign_no`) VALUES
 (32, 'Friday', '08:45:00', '10:45:00', 1, 39),
 (33, 'Friday', '10:45:00', '12:45:00', 10, 40),
 (34, 'Friday', '10:45:00', '11:45:00', 1, 41),
@@ -189,7 +189,7 @@ INSERT INTO `registration` (`id`, `firstName`, `lastName`, `gender`, `email`, `p
 --
 
 CREATE TABLE `rooms` (
-  `room_no` int(5) NOT NULL,
+  `room_id` int(5) NOT NULL,
   `number` varchar(11) NOT NULL,
   `capacity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -198,7 +198,7 @@ CREATE TABLE `rooms` (
 -- Dumping data for table `rooms`
 --
 
-INSERT INTO `rooms` (`room_no`, `number`, `capacity`) VALUES
+INSERT INTO `rooms` (`room_id`, `number`, `capacity`) VALUES
 (1, '601', 25),
 (4, '501', 30),
 (7, '602', 35),
@@ -213,7 +213,7 @@ INSERT INTO `rooms` (`room_no`, `number`, `capacity`) VALUES
 --
 
 CREATE TABLE `teachers` (
-  `teacher_no` int(5) NOT NULL,
+  `teacher_id` int(5) NOT NULL,
   `name` varchar(40) DEFAULT NULL,
   `phone` varchar(20) NOT NULL,
   `email` varchar(40) NOT NULL
@@ -223,7 +223,7 @@ CREATE TABLE `teachers` (
 -- Dumping data for table `teachers`
 --
 
-INSERT INTO `teachers` (`teacher_no`, `name`, `phone`, `email`) VALUES
+INSERT INTO `teachers` (`teacher_id`, `name`, `phone`, `email`) VALUES
 (10, 'towfique hasan', '01939318003', 'towfiquehasan02@gmail.com'),
 (11, 'Taskin Fatema', '04155445512', 'TaskinFatema@gmail.com'),
 (12, 'Abul Al Arabi', '01555852558', 'abulAlArabi@gmail.com'),
@@ -274,7 +274,7 @@ INSERT INTO `time_slots` (`id`, `name`, `start_time`, `end_time`, `day_group`) V
 ALTER TABLE `assigns`
   ADD PRIMARY KEY (`assign_no`),
   ADD KEY `course_no` (`course_no`),
-  ADD KEY `teacher_no` (`teacher_no`);
+  ADD KEY `teacher_id` (`teacher_id`);
 
 --
 -- Indexes for table `bookings`
@@ -282,7 +282,7 @@ ALTER TABLE `assigns`
 ALTER TABLE `bookings`
   ADD PRIMARY KEY (`booking_no`),
   ADD KEY `assign_no` (`assign_no`),
-  ADD KEY `room_no` (`room_no`);
+  ADD KEY `room_id` (`room_id`);
 
 --
 -- Indexes for table `booking_slots`
@@ -307,14 +307,14 @@ ALTER TABLE `registration`
 -- Indexes for table `rooms`
 --
 ALTER TABLE `rooms`
-  ADD PRIMARY KEY (`room_no`),
+  ADD PRIMARY KEY (`room_id`),
   ADD UNIQUE KEY `number` (`number`);
 
 --
 -- Indexes for table `teachers`
 --
 ALTER TABLE `teachers`
-  ADD PRIMARY KEY (`teacher_no`);
+  ADD PRIMARY KEY (`teacher_id`);
 
 --
 -- Indexes for table `time_slots`
@@ -360,13 +360,13 @@ ALTER TABLE `registration`
 -- AUTO_INCREMENT for table `rooms`
 --
 ALTER TABLE `rooms`
-  MODIFY `room_no` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `room_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `teachers`
 --
 ALTER TABLE `teachers`
-  MODIFY `teacher_no` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `teacher_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `time_slots`
@@ -383,14 +383,14 @@ ALTER TABLE `time_slots`
 --
 ALTER TABLE `assigns`
   ADD CONSTRAINT `assigns_ibfk_1` FOREIGN KEY (`course_no`) REFERENCES `courses` (`course_no`),
-  ADD CONSTRAINT `assigns_ibfk_2` FOREIGN KEY (`teacher_no`) REFERENCES `teachers` (`teacher_no`);
+  ADD CONSTRAINT `assigns_ibfk_2` FOREIGN KEY (`teacher_id`) REFERENCES `teachers` (`teacher_id`);
 
 --
 -- Constraints for table `bookings`
 --
 ALTER TABLE `bookings`
   ADD CONSTRAINT `bookings_ibfk_1` FOREIGN KEY (`assign_no`) REFERENCES `assigns` (`assign_no`),
-  ADD CONSTRAINT `bookings_ibfk_2` FOREIGN KEY (`room_no`) REFERENCES `rooms` (`room_no`);
+  ADD CONSTRAINT `bookings_ibfk_2` FOREIGN KEY (`room_id`) REFERENCES `rooms` (`room_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

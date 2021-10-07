@@ -111,9 +111,9 @@
             </div>
           </div> -->
           <div class="form-group">
-            <ng-select [clearable]="false"  name="room_no" [(ngModel)]="booking.room_no" #room_no="ngModel">
+            <ng-select [clearable]="false"  name="room_id" [(ngModel)]="booking.room_id" #room_id="ngModel">
               <ng-option [value]="null">Select a Course </ng-option>
-              <ng-option *ngFor="let item of roomList" [value]="item.room_no">
+              <ng-option *ngFor="let item of roomList" [value]="item.room_id">
                 student:{{item.number}}, capacity:{{item.capacity}} </ng-option>
             </ng-select>
             <label class="form-control-placeholder cs-sup">Room Number</label>

@@ -138,7 +138,7 @@ export class RoomBookingComponent implements OnInit {
 
       let commonCheck =  ((startDate <= st &&  endDate >= st) || (startDate <= ed &&  endDate >= st)) && (element.day == day);
       if(type == 'room'){
-        if( commonCheck && (element.room_no) == this.booking.room_no ){
+        if( commonCheck && (element.room_id) == this.booking.room_id ){
           // return true;
           count++;
           overlapObj.isOverlap = true;
@@ -167,7 +167,7 @@ export class RoomBookingComponent implements OnInit {
   }
   onClickSave(f){
     var room = this.roomList.filter(v=>{
-      return ((v["room_no"] == this.booking.room_no));
+      return ((v["room_id"] == this.booking.room_id));
     })
     console.log(room)
     if(this.bookingList?.length){
