@@ -10,24 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 export class RoomListComponent implements OnInit {
 
   // public roomList:any =  new Array<Room>();
-  public roomList: any = [
-    {
-      number: 506,
-      capacity: 25,
-    },
-    {
-      number: 516,
-      capacity: 50,
-    },
-    {
-      number: 517,
-      capacity: 15,
-    },
-    {
-      number: 518,
-      capacity: 45,
-    },
-  ]
+  public roomList: any = []
 
   public searchFields: any[] = ['number'];
   public searchString;

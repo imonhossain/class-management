@@ -10,16 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 export class TeacherComponent implements OnInit {
   // public teacherList:any =  new Array<Teacher>();
   public teacherList: any = [
-    {
-      name: "Teacher 1",
-      email: "teacher1@gmail.com",
-      phone: "0181258555"
-    },
-    {
-      name: "Teacher 2",
-      email: "teacher2@gmail.com",
-      phone: "0181258555"
-    }
+   
   ]
   constructor(
     private teacherServices: TeacherServices,
