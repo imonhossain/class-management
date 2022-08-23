@@ -3,8 +3,8 @@ const pool = require("../../config/database");
 module.exports = {
   getAssigns: callBack => {
     pool.query(
-      `SELECT a.semister, a.assign_no , a.register_student , c.course_name,  c.course_no,t.teacher_no, t.name "teacher_name" from assigns a, courses c, teachers t where 
-      a.course_no = c.course_no and a.teacher_no = t.teacher_no order by a.semister`,
+      `SELECT a.semister, a.assign_id , a.register_student , c.course_name,  c.course_id,t.teacher_id, t.name "teacher_name" from assigns a, courses c, teachers t where 
+      a.course_id = c.course_id and a.teacher_id = t.teacher_id order by a.semister`,
       [],
       (error, results, fields) => {
         if (error) {
@@ -19,10 +19,10 @@ module.exports = {
 
     let totalStudents = data.register_student;
     let totalItaration = 0;
-    let courseNo = data.course_no;
+    let courseNo = data.course_id;
     let hours = 0;
     let semister = data.semister;
-    let teacher_no = data.teacher_no;
+    let teacher_id = data.teacher_id;
     let matchRoomList = [];
     let availableSlot = [];
     let findResult = false;
@@ -35,8 +35,8 @@ module.exports = {
     function assignMutation() {
       
       pool.query(
-        `insert into assigns(semister, register_student, course_no, teacher_no) 
-                  values(${data.semister},${data.register_student},${data.course_no},${data.teacher_no})`,
+        `insert into assigns(semister, register_student, course_id, teacher_id) 
+                  values(${data.semister},${data.register_student},${data.course_id},${data.teacher_id})`,
         (error, results) => {
           if (error) {
             callBack(error);
@@ -47,7 +47,7 @@ module.exports = {
     }
     function bookingMutation(assignId) {
         pool.query(
-            `insert into bookings(assign_no, room_no, day, startDate, endDate) 
+            `insert into bookings(assign_id, room_id, day, startDate, endDate) 
                     values(?,?,?,?,?)`,
             [
                 assignId,
@@ -76,7 +76,7 @@ module.exports = {
                     callBack(error);
                 }
                 pool.query(
-                    `SELECT * from bookings WHERE booking_no =${bookingId}`,
+                    `SELECT * from bookings WHERE booking_id =${bookingId}`,
                     (error, results) => {
                         if (error) {
                             callBack(error);
@@ -89,7 +89,7 @@ module.exports = {
     }
     function getHours() {
         pool.query(
-            `SELECT course_credit, CASE WHEN course_credit > 2 THEN 2 ELSE 1 END AS hours from courses WHERE course_no = ?`,
+            `SELECT course_credit, CASE WHEN course_credit > 2 THEN 2 ELSE 1 END AS hours from courses WHERE course_id = ?`,
             [courseNo],
             (error, results) => {
                 console.log("hours results", results);
@@ -125,12 +125,12 @@ module.exports = {
         let slot3 = [];
         console.log("matchRoomList---", matchRoomList);
         let element = matchRoomList[counter];
-        bookingRoomId = element.room_no;
+        bookingRoomId = element.room_id;
         console.log("log ", counter);
         counter++;
         pool.query(
-            `SELECT * FROM time_slots WHERE id NOT IN (SELECT ts.id FROM assigns a INNER JOIN bookings b ON b.assign_no = a.assign_no INNER JOIN booking_slots bs on bs.booking_id=b.booking_no INNER JOIN time_slots ts ON bs.time_slot_id=ts.id WHERE a.teacher_no = ? AND semister=?) AND id NOT IN (SELECT ts.id FROM rooms r INNER JOIN bookings b ON b.room_no = r.room_no INNER JOIN booking_slots bs on bs.booking_id=b.booking_no INNER JOIN time_slots ts ON bs.time_slot_id=ts.id WHERE r.room_no = ?)`,
-            [teacher_no, semister, bookingRoomId],
+            `SELECT * FROM time_slots WHERE id NOT IN (SELECT ts.id FROM assigns a INNER JOIN bookings b ON b.assign_id = a.assign_id INNER JOIN booking_slots bs on bs.booking_id=b.booking_id INNER JOIN time_slots ts ON bs.time_slot_id=ts.id WHERE a.teacher_id = ? AND semister=?) AND id NOT IN (SELECT ts.id FROM rooms r INNER JOIN bookings b ON b.room_id = r.room_id INNER JOIN booking_slots bs on bs.booking_id=b.booking_id INNER JOIN time_slots ts ON bs.time_slot_id=ts.id WHERE r.room_id = ?)`,
+            [teacher_id, semister, bookingRoomId],
             (error, results) => {
                 // console.log("room list results", results);
                 if (error) {
@@ -180,8 +180,8 @@ module.exports = {
   deleteAssign: (data, callBack) => {
     console.log("delete data", data);
     pool.query( 
-      `delete from assigns where assign_no = ?`,
-      [data.assign_no],
+      `delete from assigns where assign_id = ?`,
+      [data.assign_id],
       (error, results) => {
         console.log("delete results", results); 
         if (error) {
@@ -197,14 +197,14 @@ module.exports = {
   updateAssign: (data, callBack) => {
     console.log("update assigns data ", data);
     pool.query(
-      `update assigns set semister=?, register_student=?, course_no=?, teacher_no=?, section=? where assign_no = ?`,
+      `update assigns set semister=?, register_student=?, course_id=?, teacher_id=?, section=? where assign_id = ?`,
       [
         data.semister,
         data.register_student,
-        data.course_no,
-        data.teacher_no,
+        data.course_id,
+        data.teacher_id,
         data.section,
-        data.assign_no
+        data.assign_id
       ],
       (error, results) => {
         console.log("update assigns ", results);

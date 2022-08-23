@@ -145,7 +145,7 @@ export class RoomBookingComponent implements OnInit {
           overlapObj.message = `Course Name:${element.course_name}, Teacher Name: ${element.teacher_name}`;
         }
       }else if(type == 'semister'){
-        if( commonCheck && (element.assign_no) == this.booking.assign_no ){
+        if( commonCheck && (element.assign_id) == this.booking.assign_id ){
           // return true;
           count++;
           overlapObj.isOverlap = true;
@@ -188,7 +188,7 @@ export class RoomBookingComponent implements OnInit {
     }
 
   
-    if(!this.booking.booking_no){
+    if(!this.booking.booking_id){
       this.bookingServices.saveBooking(this.booking).subscribe(result=>{
         if(result.success == 1){
           this.bookingList.push(new Booking(result.data));

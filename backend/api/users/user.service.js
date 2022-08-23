@@ -22,16 +22,23 @@ module.exports = {
     );
   },
   getUserByUserEmail: (email, callBack) => {
-    pool.query(
-      `select * from registration where email = ?`,
-      [email],
-      (error, results, fields) => {
-        if (error) {
-          callBack(error);
+    console.log('pool', pool);
+    try{
+      pool.query(
+        `select * from registration where email = ?`,
+        [email],
+        (error, results, fields) => {
+          console.log('error', error);
+          if (error) {
+            callBack(error);
+          }
+          return callBack(null, results[0]);
         }
-        return callBack(null, results[0]);
-      }
-    );
+      );
+    }catch(e){
+      console.log('e', e);
+    }
+    
   },
   getUserByUserId: (id, callBack) => {
     pool.query(

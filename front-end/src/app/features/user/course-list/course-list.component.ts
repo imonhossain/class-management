@@ -62,7 +62,7 @@ export class CourseListComponent implements OnInit {
     })
   }
   onClickSave(f) {
-    if (!this.course.course_no) {
+    if (!this.course.course_id) {
       this.courseServices.saveCourse(this.course).subscribe(result => {
         console.log("result", result);
         if (result.success == 1) {

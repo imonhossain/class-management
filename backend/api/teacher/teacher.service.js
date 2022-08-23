@@ -3,7 +3,7 @@ const pool = require("../../config/database");
 module.exports = {
   getTeachers: callBack => {
     pool.query(
-      `select teacher_no, name, phone, email from teachers`,
+      `select teacher_id, name, phone, email from teachers`,
       [],
       (error, results, fields) => {
         if (error) {
@@ -30,7 +30,7 @@ module.exports = {
           callBack(error);
         }
         pool.query(
-          `select * from teachers where teacher_no =${results.insertId}`,
+          `select * from teachers where teacher_id =${results.insertId}`,
           (error, results) => {
             console.log("result --- ", results);
             console.log("error --- ", error); 
@@ -56,8 +56,8 @@ module.exports = {
   deleteTeacher: (data, callBack) => {
     console.log("delete data", data);
     pool.query( 
-      `delete from teachers where teacher_no = ?`,
-      [data.teacher_no],
+      `delete from teachers where teacher_id = ?`,
+      [data.teacher_id],
       (error, results) => {
         console.log("delete results", results); 
         if (error) {
@@ -73,12 +73,12 @@ module.exports = {
   updateTeacher: (data, callBack) => {
     console.log("update teachers data ", data);
     pool.query(
-      `update teachers set name=?, phone=?, email=? where teacher_no = ?`,
+      `update teachers set name=?, phone=?, email=? where teacher_id = ?`,
       [
         data.name,
         data.phone,
         data.email,
-        data.teacher_no
+        data.teacher_id
       ],
       (error, results) => {
         console.log("update teachers ", results);

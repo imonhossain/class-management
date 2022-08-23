@@ -92,15 +92,15 @@
             </div>
           </div> -->
           <div class="form-group">
-            <ng-select [clearable]="false"  name="course_no" [(ngModel)]="assign.course_no" #course_no="ngModel">
+            <ng-select [clearable]="false"  name="course_id" [(ngModel)]="assign.course_id" #course_id="ngModel">
               <ng-option [value]="null">Select a Course </ng-option>
-              <ng-option *ngFor="let course of courseList" [value]="course.course_no">
+              <ng-option *ngFor="let course of courseList" [value]="course.course_id">
                 {{course.course_name}}</ng-option>
             </ng-select>
             <label class="form-control-placeholder cs-sup">Course Name</label>
-            <!-- <div *ngIf="f.submitted && course_no.invalid || (course_no.invalid && (course_no.dirty || course_no.touched))"
+            <!-- <div *ngIf="f.submitted && course_id.invalid || (course_id.invalid && (course_id.dirty || course_id.touched))"
               class="alert alert-danger">
-              <div *ngIf="course_no.errors.required">
+              <div *ngIf="course_id.errors.required">
                 Course Name is required.
               </div>
             </div> -->
@@ -163,8 +163,8 @@
           <!--/.form-group-->
 
           <div>
-            <button class="btn btn-primary" *ngIf="!assign.assign_no" type="submit">Save</button>
-            <button class="btn btn-primary" *ngIf="assign.assign_no"  type="submit">Update</button>
+            <button class="btn btn-primary" *ngIf="!assign.assign_id" type="submit">Save</button>
+            <button class="btn btn-primary" *ngIf="assign.assign_id"  type="submit">Update</button>
           </div>
         </div>
       </form><!--/.card-->

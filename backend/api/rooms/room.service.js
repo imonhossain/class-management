@@ -3,7 +3,7 @@ const pool = require("../../config/database");
 module.exports = {
   getRooms: callBack => {
     pool.query(
-      `select room_no, number, capacity from rooms`,
+      `select room_id, number, capacity from rooms`,
       [],
       (error, results, fields) => {
         if (error) {
@@ -27,7 +27,7 @@ module.exports = {
           callBack(error);
         }
         pool.query(
-          `select * from rooms where room_no =${results.insertId}`,
+          `select * from rooms where room_id =${results.insertId}`,
           (error, results) => {
             // console.log("result --- ", results);
             // console.log("error --- ", error); 
@@ -46,8 +46,8 @@ module.exports = {
   deleteRoom: (data, callBack) => {
     console.log("delete data", data);
     pool.query( 
-      `delete from rooms where room_no = ?`,
-      [data.room_no],
+      `delete from rooms where room_id = ?`,
+      [data.room_id],
       (error, results) => {
         console.log("delete results", results); 
         if (error) {
@@ -63,11 +63,11 @@ module.exports = {
   updateRoom: (data, callBack) => {
     console.log("update rooms data ", data);
     pool.query(
-      `update rooms set number=?, capacity=? where room_no = ?`,
+      `update rooms set number=?, capacity=? where room_id = ?`,
       [
         data.number,
         data.capacity,
-        data.room_no
+        data.room_id
       ],
       (error, results) => {
         console.log("update rooms ", results);

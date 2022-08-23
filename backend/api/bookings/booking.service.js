@@ -3,7 +3,7 @@ const pool = require("../../config/database");
 module.exports = {
   getRotines: callBack => {
     pool.query(
-      `select r.number, r.capacity, b.booking_no, b.day, b.startDate, b.endDate, c.course_name, c.course_no, t.teacher_no,a.semister, a.assign_no, a.register_student , t.name "teacher_name" from rooms r, bookings b, assigns a, teachers t , courses c WHERE b.assign_no = a.assign_no and a.course_no = c.course_no and a.teacher_no = t.teacher_no and b.room_no = r.room_no and b.day = "friday"`,
+      `select r.number, r.capacity, b.booking_id, b.day, b.startDate, b.endDate, c.course_name, c.course_id, t.teacher_id,a.semister, a.assign_id, a.register_student , t.name "teacher_name" from rooms r, bookings b, assigns a, teachers t , courses c WHERE b.assign_id = a.assign_id and a.course_id = c.course_id and a.teacher_id = t.teacher_id and b.room_id = r.room_id and b.day = "friday"`,
       [],
       (error, results, fields) => {
         if (error) {
@@ -15,7 +15,7 @@ module.exports = {
   },
   getRotinesSatureay: callBack => {
     pool.query(
-      `select r.number, r.capacity, b.booking_no, b.day, b.startDate, b.endDate, c.course_name, c.course_no, t.teacher_no,a.semister, a.assign_no, a.register_student , t.name "teacher_name" from rooms r, bookings b, assigns a, teachers t , courses c WHERE b.assign_no = a.assign_no and a.course_no = c.course_no and a.teacher_no = t.teacher_no and b.room_no = r.room_no and b.day = "saturday"`,
+      `select r.number, r.capacity, b.booking_id, b.day, b.startDate, b.endDate, c.course_name, c.course_id, t.teacher_id,a.semister, a.assign_id, a.register_student , t.name "teacher_name" from rooms r, bookings b, assigns a, teachers t , courses c WHERE b.assign_id = a.assign_id and a.course_id = c.course_id and a.teacher_id = t.teacher_id and b.room_id = r.room_id and b.day = "saturday"`,
       [],
       (error, results, fields) => {
         if (error) {
@@ -29,7 +29,7 @@ module.exports = {
 
   getBookings: callBack => {
     pool.query(
-      `SELECT b.booking_no, b.startDate, b.endDate, b.day, r.number "room_number", a.semister, a.assign_no, a.register_student , c.course_name, c.course_no, t.teacher_no, t.name "teacher_name" from bookings b, assigns a, courses c, rooms r, teachers t where b.assign_no = a.assign_no and a.course_no = c.course_no and a.teacher_no = t.teacher_no and b.room_no = r.room_no`,
+      `SELECT b.booking_id, b.startDate, b.endDate, b.day, r.number "room_number", a.semister, a.assign_id, a.register_student , c.course_name, c.course_id, t.teacher_id, t.name "teacher_name" from bookings b, assigns a, courses c, rooms r, teachers t where b.assign_id = a.assign_id and a.course_id = c.course_id and a.teacher_id = t.teacher_id and b.room_id = r.room_id`,
       [],
       (error, results, fields) => {
         if (error) {
@@ -44,11 +44,11 @@ module.exports = {
     console.log("startDate type data", typeof(data.startDate));
     console.log("endDate type data", typeof(data.endDate));
     pool.query(
-      `insert into bookings(assign_no, room_no, day, startDate, endDate) 
+      `insert into bookings(assign_id, room_id, day, startDate, endDate) 
                 values(?,?,?,?,?)`,
       [
-        data.assign_no, 
-        data.room_no,  
+        data.assign_id, 
+        data.room_id,  
         data.day,
         data.startDate, 
         data.endDate
@@ -62,7 +62,7 @@ module.exports = {
           callBack(error);
         }
         pool.query(
-          `SELECT * from bookings WHERE booking_no =${results.insertId}`,
+          `SELECT * from bookings WHERE booking_id =${results.insertId}`,
           (error, results) => {
             console.log("result --- ", results);
             console.log("error --- ", error); 
@@ -88,8 +88,8 @@ module.exports = {
   deleteBooking: (data, callBack) => {
     console.log("delete data", data);
     pool.query( 
-      `delete from bookings where booking_no = ?`,
-      [data.booking_no],
+      `delete from bookings where booking_id = ?`,
+      [data.booking_id],
       (error, results) => {
         console.log("delete results", results); 
         if (error) {
@@ -105,14 +105,14 @@ module.exports = {
   updateBooking: (data, callBack) => {
     console.log("update bookings data ", data);
     pool.query(
-      `update bookings set semister=?, register_student=?, course_no=?, teacher_no=?, section=? where booking_no = ?`,
+      `update bookings set semister=?, register_student=?, course_id=?, teacher_id=?, section=? where booking_id = ?`,
       [
         data.semister,
         data.register_student,
-        data.course_no,
-        data.teacher_no,
+        data.course_id,
+        data.teacher_id,
         data.section,
-        data.booking_no
+        data.booking_id
       ],
       (error, results) => {
         console.log("update bookings ", results);

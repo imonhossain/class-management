@@ -73,13 +73,13 @@
         </div>
         <div class="card-body" >
           <div class="form-group">
-            <ng-select [clearable]="false"  name="assign_no" [(ngModel)]="booking.assign_no" #course_no="ngModel">
+            <ng-select [clearable]="false"  name="assign_id" [(ngModel)]="booking.assign_id" #course_id="ngModel">
               <ng-option [value]="null">Select a Course </ng-option>
-              <ng-option *ngFor="let item of assignList" [value]="item.assign_no">
+              <ng-option *ngFor="let item of assignList" [value]="item.assign_id">
                 {{item.course_name}}({{item.semister}}) -  {{item.teacher_name}}</ng-option>
             </ng-select>
             <label class="form-control-placeholder cs-sup">Assign list</label>
-            <!-- <select  class="form-control" [(ngModel)]="booking.assign_no" name="semester">
+            <!-- <select  class="form-control" [(ngModel)]="booking.assign_id" name="semester">
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -182,8 +182,8 @@
           <!--/.form-group-->
 
           <div>
-            <button class="btn btn-primary" *ngIf="!booking.booking_no" type="submit">Save</button>
-            <button class="btn btn-primary" *ngIf="booking.booking_no"  type="submit">Update</button>
+            <button class="btn btn-primary" *ngIf="!booking.booking_id" type="submit">Save</button>
+            <button class="btn btn-primary" *ngIf="booking.booking_id"  type="submit">Update</button>
           </div>
         </div>
       </form><!--/.card-->

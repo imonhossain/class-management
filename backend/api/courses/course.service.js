@@ -3,7 +3,7 @@ const pool = require("../../config/database");
 module.exports = {
   getCourses: callBack => {
     pool.query(
-      `select course_no, course_name, course_credit, course_code, semester from courses`,
+      `select course_id, course_name, course_credit, course_code, semester from courses`,
       [],
       (error, results, fields) => {
         if (error) {
@@ -28,7 +28,7 @@ module.exports = {
           callBack(error);
         }
         pool.query(
-          `select * from courses where course_no =${results.insertId}`,
+          `select * from courses where course_id =${results.insertId}`,
           (error, results) => {
             console.log("result --- ", results);
             console.log("error --- ", error); 
@@ -47,8 +47,8 @@ module.exports = {
   deleteCourse: (data, callBack) => {
     console.log("delete data", data);
     pool.query( 
-      `delete from courses where course_no = ?`,
-      [data.course_no],
+      `delete from courses where course_id = ?`,
+      [data.course_id],
       (error, results) => {
         console.log("delete results", results); 
         if (error) {
@@ -64,13 +64,13 @@ module.exports = {
   updateCourse: (data, callBack) => {
     console.log("update courses data ", data);
     pool.query(
-      `update courses set course_name=?, course_credit=?, course_code=?, semester=? where course_no = ?`,
+      `update courses set course_name=?, course_credit=?, course_code=?, semester=? where course_id = ?`,
       [
         data.course_name,
         data.course_credit,
         data.course_code,
         data.semester,
-        data.course_no
+        data.course_id
       ],
       (error, results) => {
         console.log("update courses ", results);

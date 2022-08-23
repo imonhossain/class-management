@@ -105,17 +105,17 @@ export class AssigntTeacherComponent implements OnInit {
   }
   onClickSave(f) {
     // var result = this.assignList.filter(function(v, i) {
-    //   return ((v["course_no"] == this.assign.course_no && v["teacher_id"] == this.assign.teacher_id) && v.semister == this.assign.semister );
+    //   return ((v["course_id"] == this.assign.course_id && v["teacher_id"] == this.assign.teacher_id) && v.semister == this.assign.semister );
     // })
     var result = this.assignList.filter(v => {
-      return ((v["course_no"] == this.assign.course_no && v["teacher_id"] == this.assign.teacher_id) && v.semister == this.assign.semister);
+      return ((v["course_id"] == this.assign.course_id && v["teacher_id"] == this.assign.teacher_id) && v.semister == this.assign.semister);
     })
     console.log(result)
     if (result?.length) {
       this.toastr.warning("Duplicate value found ", 'Warning');
       return;
     }
-    if (!this.assign.assign_no) {
+    if (!this.assign.assign_id) {
       this.assignServices.saveAssign(this.assign).subscribe(result => {
         console.log("result", result);
         if (result.success == 1) {
