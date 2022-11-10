@@ -32,7 +32,7 @@ export class RoomBookingComponent implements OnInit {
     private bookingServices:BookingServices, 
     private toastr:ToastrService) { }
 
-  public searchFields: any[] = ['course_name'];
+  public searchFields: any[] = ['teacher_name'];
   public searchString;
 
   public booking:Booking = new Booking({startDate:'17:00', endDate:'20:00'});

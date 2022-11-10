@@ -22,7 +22,7 @@
                   <th scope="col">Course Code</th>
                   <!-- <th scope="col">Semester</th> -->
                   <th scope="col">Credit</th>
-                  <!-- <th scope="col" class="text-center">Actions</th> -->
+                  <th scope="col" class="text-center">Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -31,10 +31,10 @@
                   <td>{{ item.course_code }}</td>
                   <!-- <td>{{ item.semester}}</td> -->
                   <td>{{ item.course_credit}}</td>
-                  <!-- <td class="text-center">
+                  <td class="text-center">
                     <button class="btn btn-info btn-sm mr-1" (click)="onClickEdit(item, i)">Edit</button>
                     <button class="btn btn-danger btn-sm" (click)="onClickDelete(item, i)">Delete</button>
-                  </td> -->
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -42,7 +42,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-4 d-none">
+    <div class="col-md-4">
       <form class="card" name="form" (ngSubmit)="f.form.valid && onClickSave(f)" #f="ngForm" novalidate>
         <div class="card-header">
           <div class="row">

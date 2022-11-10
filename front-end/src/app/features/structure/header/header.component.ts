@@ -35,6 +35,11 @@ export class HeaderComponent implements OnInit {
     console.log(this.user)
 
   }
+  onCLickLogout(){
+    // debugger;
+    localStorage.clear();
+    this.router.navigate(['/login'])
+  }
 
  
 }
