@@ -125,6 +125,7 @@ export class AssigntTeacherComponent implements OnInit {
           this.toastr.success(`Day ${data.day}, Time:${data.startDate} - ${data.endDate} `, 'Success', {
             timeOut: 10000,
           });
+          this.getAllAssigns();
           // this.toastr.success("Save Successfully ",'Success');
           f.resetForm();
         } else {
@@ -142,7 +143,7 @@ export class AssigntTeacherComponent implements OnInit {
         }
       })
     }
-
+    
   }
   onClickUpdate() {
     this.assignServices.updateAssign(this.assign).subscribe(result => {
@@ -150,5 +151,7 @@ export class AssigntTeacherComponent implements OnInit {
       this.assign = new Assign();
     })
   }
+
+  
 
 }
